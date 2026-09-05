@@ -5,7 +5,7 @@ import { nanoid } from "nanoid";
 import { type Request } from "express";
 import dayjs from "dayjs";
 import { getAllUserSessions } from "@db/repositories.js";
-import { type Details } from "express-useragent";
+import { type AgentDetails } from "express-useragent";
 import { type ProviderType } from "@db/schema.js";
 import { NODE_ENV } from "@src/utils/env.js";
 
@@ -55,7 +55,7 @@ export async function formatSession(req: Request) {
     const sess = session.sess as any;
     const createdAt = (sess?.createdAt ?? new Date().getTime()) as number;
     const dt = dayjs(createdAt);
-    const useragent = (sess?.useragent ?? null) as Details | null;
+    const useragent = (sess?.useragent ?? null) as AgentDetails | null;
     const useragentStr = useragent
       ? `${useragent.browser} - ${useragent.os}`
       : "Unknown Source";
